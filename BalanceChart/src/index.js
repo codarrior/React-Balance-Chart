@@ -1,8 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import createLogger from 'redux-logger'
+import reducer from './reducers'
+import App from './containers/App'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const store = createStore(
+  reducer, applyMiddleware(createLogger)
+)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+
+ 
